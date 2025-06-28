@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TactiCore Mini Chat</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #101010; color: white; padding: 20px; }
+    .chatbox { max-width: 600px; margin: auto; }
+    .message { margin-bottom: 15px; }
+    .user { color: #00ff99; }
+    .bot { color: #ffffff; }
+    input[type="text"] {
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      border: none;
+      margin-top: 10px;
+    }
+    button {
+      background-color: #00ff99;
+      color: #000;
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      margin-top: 10px;
+      width: 100%;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="chatbox">
+    <h2>TactiCore Mini Chat</h2>
+    <div id="chat"></div>
+    <input type="text" id="input" placeholder="Ask TactiCore..." />
+    <button onclick="sendMessage()">Send</button>
+  </div>
+
+  <script>
+    const chat = document.getElementById('chat');
+    const input = document.getElementById('input');
+
+    const responseEngine = (text) => {
+      const q = text.toLowerCase();
+      if (q.includes('guardiola')) return '🔁 Guardiola Style: 3-2-5, inverted fullbacks, high press.';
+      if (q.includes('mourinho')) return '🧱 Mourinho Low Block: 4-4-1-1, structured defence, counter-attacks.';
+      if (q.includes('relationism')) return '🧠 Relationism: zone fluidity, dynamic positioning, 4-3-2-1.';
+      if (q.includes('generate')) return '🎨 New Idea: 3-4-2-1 asymmetry with a libero and double inverted wingers.';
+      if (q.includes('export')) return '📤 Tactic exported (simulated) as FM-style config.';
+      if (q.includes('fm24')) return '📊 FM24 integration: paste player data for tactical fit.';
+      return '❌ Unknown command. Try asking about Guardiola, Relationism, Mourinho, or Export.';
+    };
+
+    function sendMessage() {
+      const userText = input.value;
+      if (!userText.trim()) return;
+      const botResponse = responseEngine(userText);
+
+      chat.innerHTML += `<div class='message user'>You: ${userText}</div>`;
+      chat.innerHTML += `<div class='message bot'>TactiCore: ${botResponse}</div>`;
+      input.value = '';
+      chat.scrollTop = chat.scrollHeight;
+    }
+  </script>
+</body>
+</html>
